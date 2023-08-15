@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-const newUser = "soyUnNuevoUser"
-
 // CREAR USER - POST
+const newUser = "soyUnNuevoUser"
 const createUser = async () => {
     const response = await fetch(`https://playground.4geeks.com/apis/fake/todos/user/${newUser}`,
         {
@@ -34,19 +33,35 @@ const updateUser = async () => {
 }
 
 
-// READ
-
+// READ - GET
 const readUser = async () => {
-        try {
-          const response = await fetch(`https://playground.4geeks.com/apis/fake/todos/user/${userName}`);
-          const json = await response.json();
-          setData(json);
-          
-          
-        } catch (error) {
-          console.log(error);
-        }
+    try {
+        const response = await fetch(`https://playground.4geeks.com/apis/fake/todos/user/${userName}`);
+        const json = await response.json();
+        setData(json);
 
+    } catch (error) {
+        console.log(error);
+    }
         console.log(data)
-        
+}
+
+
+// DELETE
+
+const userToDelete = "soyUnNuevoUser"
+
+const deleteUser = async () => {
+    const response = await fetch(`https://playground.4geeks.com/apis/fake/todos/user/${userToDelete}`, 
+        {
+            method: 'DELETE',
+            headers: { "Content-Type": "application/json" }
+        }
+    );
+
+    if (response.ok) {
+        console.log('User deleted successfully');
+    } else {
+        console.log('Error deleting user'); 
+    }
 }

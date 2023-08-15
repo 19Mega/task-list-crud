@@ -48,9 +48,7 @@ const readUser = async () => {
 
 
 // DELETE
-
 const userToDelete = "soyUnNuevoUser"
-
 const deleteUser = async () => {
     const response = await fetch(`https://playground.4geeks.com/apis/fake/todos/user/${userToDelete}`, 
         {

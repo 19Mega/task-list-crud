@@ -19,7 +19,8 @@ const CRUD_Read = () => {
             console.log(error);
           }
 
-          console.log(data) 
+          console.log("DATA LEIDA EN EL CRUD_READ: ",data) 
+          console.log(data)
   }
 
 

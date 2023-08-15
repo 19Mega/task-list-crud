@@ -1,18 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const ToDoListComponent = () => {
 
     const [inputValue, setInputValue ] = useState('')
     const [toDoList, setToDoList]=useState([])
+    const [toDoListMapped, setToDoListMapped] =([])
     const [taskCounter, settaskCounter]= useState(0)
-    const [dataToSend, setDataToSend] = useState([])
 
     // USUARIO PUESTO A MANO, SE PUEDE HACER UN INPUT PARA ESTA VARIABLE E INYECTARLA AL USUARIO QUE SE DESEA ACTUALIZAR
-    const user = "klgs1234" 
+    const user = "matias" 
 
     // ENVIAR LA LISTA MAPEADA A LA API
     const enviarTasks = async (putData) => {
-        
         const response = await fetch(`https://playground.4geeks.com/apis/fake/todos/user/${user}`,
            {
             method: "PUT",
@@ -31,58 +30,55 @@ const ToDoListComponent = () => {
         if (response.ok !== true) {
             setFormResponse("The user exist")
         }
-        
-        
     };
-
 
     const addNewTask = (event) => {
         if (event.key === "Enter") {
           setToDoList(toDoList.concat(inputValue))
           setInputValue("")
-          console.log("estoy adentro del addnewtask y dentro del if") 
         }
     }
 
     const deleteTask = (task) =>{
-        console.log("dentro del deleteTask: ", task)
         setToDoList(toDoList.filter(item => item !== task)) // con filter actualizo el array con otro array
     }
 
-     useEffect(()=>{ // se va ejecutar cada vez que se modifique []
-         console.log("nuevo item en todoList")
-         console.log(toDoList)
-         settaskCounter(toDoList.length)
-         // TEST
-         handleTestButton() // actualiza la data
+    useEffect(()=>{ // se va ejecutar cada vez que se modifique []
+        console.log("nuevo item en todoList")
+        console.log(toDoList)
+        settaskCounter(toDoList.length)
+        // TEST
+        //handleTestButton() // actualiza la data
 
-     },[toDoList])
+    },[toDoList])
 
-    useEffect(()=>{ // se ejecuta cada vez que pone algo en el input
-        console.log(inputValue)
-    },[inputValue])
+    const loadTaskList = async () => {    
+        try {
+            const response = await fetch(`https://playground.4geeks.com/apis/fake/todos/user/${user}`);
+            const json = await response.json();
+            setToDoList(json.map(item => item.label))
+        } catch (error) {
+            console.log(error);
+        }           
+    }
 
     // TEST
     const handleTestButton = () =>{
-
         // ["a","b","c"] // antes de mapear la lista (toDoList)
         let data = toDoList.map((task) => ({ label: task, done: false }));
-        
         //[{label:"a", done:false}, {label:"b", done:false}, {label:"c", done:false}] // despues de mapear la lista (toDoList)
-        setDataToSend(data)
-
-
-        console.log("EN TEST ENVIAR DATA: ", dataToSend);
         console.log("EN TEST DATA: ", data)
         enviarTasks(data)
+        setToDoListMapped(data)
     }
    
 
     return (
         <div className="mx-auto mt-1 p-2" style={{width:"280px", height:"320px"}}>
 
-            <button className="btn btn-primary" onClick={handleTestButton}>test</button>
-
+            <button className="btn btn-primary m-1" onClick={handleTestButton}>guardar tareas</button>
+            <button className="btn btn-secondary m-1" onClick={loadTaskList}>Traer tareas</button>
+            
             <h2 className="my-1 text-white"> todo's </h2>
 
             {/* lista de toDo */}
@@ -96,16 +92,16 @@ const ToDoListComponent = () => {
                 placeholder="What needs to be done?"
                 />
 
-                {toDoList.map( (task) => (
-                    <li className="list-group-item list-group-item-action text-secondary "
+                {toDoList.map( (task, id) => (
+                    <li className="list-group-item list-group-item-action text-secondary" key={id}>
+                        {task}
 
-                    >{task}
-                        <button 
-                        className="btn btn-light btn-sm float-end text-secondary link-hover"
-                        onClick={() => deleteTask(task)}
-                        >
-                        X
-                        </button>   
+                            <button 
+                            className="btn btn-light btn-sm float-end text-secondary link-hover"
+                            onClick={() => deleteTask(task)}
+                            >
+                            X
+                            </button>   
 
                     </li>
                 ))}

@@ -40,9 +40,7 @@ const CRUD_Update = () => {
     return(
         <div className="mx-auto mt-1 p-2" style={{width:"280px", height:"320px"}}>
             <h2 className="my-1"> PUT - UPDATE </h2>
-                <p className="my-1">Actualiza tareas</p>
-                <p className="my-1">Las tareas van </p>
-                <p className="my-1">dentro del body:([  objeto  ]) </p>
+              <p>actualiza tareas con una tarea sola</p>
 
             <form onSubmit={handleSubmit}>
                 <input 

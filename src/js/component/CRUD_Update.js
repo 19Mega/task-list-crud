@@ -5,9 +5,6 @@ const CRUD_Update = () => {
     const [newUser, setNewUser] = useState('')
     const [formResponse, setFormResponse] = useState('')
 
-    const [label, setLabel] = useState('')
-    const [booleanDone, setbooleanDone] = useState(false)
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 

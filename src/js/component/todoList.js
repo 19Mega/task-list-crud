@@ -5,6 +5,36 @@ const ToDoListComponent = () => {
     const [inputValue, setInputValue ] = useState('')
     const [toDoList, setToDoList]=useState([])
     const [taskCounter, settaskCounter]= useState(0)
+    const [dataToSend, setDataToSend] = useState([])
+
+    // USUARIO PUESTO A MANO, SE PUEDE HACER UN INPUT PARA ESTA VARIABLE E INYECTARLA AL USUARIO QUE SE DESEA ACTUALIZAR
+    const user = "klgs1234" 
+
+    // ENVIAR LA LISTA MAPEADA A LA API
+    const enviarTasks = async (putData) => {
+        
+        const response = await fetch(`https://playground.4geeks.com/apis/fake/todos/user/${user}`,
+           {
+            method: "PUT",
+            // en body ponemos el contenido de lo que se manda
+            body: JSON.stringify(putData),
+            headers: {
+                "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = await response.json();
+        console.log(data);
+        console.log(response.status) // 201 crea nuevo usario / 200 successful / 400 bad request 
+        console.log(response.ok); // will be true if the response is successful
+        
+        if (response.ok !== true) {
+            setFormResponse("The user exist")
+        }
+        
+        
+    };
+
 
     const addNewTask = (event) => {
         if (event.key === "Enter") {
@@ -23,17 +53,36 @@ const ToDoListComponent = () => {
          console.log("nuevo item en todoList")
          console.log(toDoList)
          settaskCounter(toDoList.length)
+         // TEST
+         handleTestButton() // actualiza la data
+
      },[toDoList])
 
     useEffect(()=>{ // se ejecuta cada vez que pone algo en el input
         console.log(inputValue)
     },[inputValue])
-    
-    // onKeyDown={} evento de presionar tecla
+
+    // TEST
+    const handleTestButton = () =>{
+
+        // ["a","b","c"] // antes de mapear la lista (toDoList)
+        let data = toDoList.map((task) => ({ label: task, done: false }));
+        
+        //[{label:"a", done:false}, {label:"b", done:false}, {label:"c", done:false}] // despues de mapear la lista (toDoList)
+        setDataToSend(data)
+
+
+        console.log("EN TEST ENVIAR DATA: ", dataToSend);
+        console.log("EN TEST DATA: ", data)
+        enviarTasks(data)
+    }
+   
 
     return (
         <div className="mx-auto mt-1 p-2" style={{width:"280px", height:"320px"}}>
-            
+
+            <button className="btn btn-primary" onClick={handleTestButton}>test</button>
+
             <h2 className="my-1 text-white"> todo's </h2>
 
             {/* lista de toDo */}

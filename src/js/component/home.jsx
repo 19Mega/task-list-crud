@@ -11,11 +11,11 @@ import rigoImage from "../../img/rigo-baby.jpg";
 //create your first component
 const Home = () => {
 	return (
-		<div className="text-center container">
+		
 
 		<div className="container text-center">
-			<div className="row">
-				<div className="col-12 mx-auto bg-dark text-white mx-2 my-2">
+			<div className="row bg-dark">
+				<div className="col-12 mx-auto bg-warning text-white mx-2 my-2">
 					<h1> C R U D </h1>
 				</div>
 
@@ -31,23 +31,19 @@ const Home = () => {
 					<CRUD_Delete/>
 				</div>
 
-				<div className="col mx-auto col bg-dark ms-1">
+				<div className="col bg-dark ms-1">
 					<ToDoListComponent/>
 				</div>
 
-				<div className="col-9 mx-auto bg-secondary mx-4 my-2">
+				<div className="col-9 mx-auto bg-secondary my-2">
 					<CRUD_Read/>
 				</div>
 
-				<div className="col-3 bg-primary">
-				</div>
+				<div className="col-3 bg-dark"></div>
 
 			</div>
 		</div>
 			
-			
-
-		</div>
 	);
 };
 

@@ -19,8 +19,7 @@ const CRUD_Read = () => {
             console.log(error);
           }
 
-          console.log(data)
-          
+          console.log(data) 
   }
 
 

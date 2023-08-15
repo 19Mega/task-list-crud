@@ -5,13 +5,17 @@ const CRUD_Update = () => {
     const [newUser, setNewUser] = useState('')
     const [formResponse, setFormResponse] = useState('')
 
+    const [label, setLabel] = useState('')
+    const [booleanDone, setbooleanDone] = useState(false)
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const response = await fetch(`https://playground.4geeks.com/apis/fake/todos/user/${newUser}`,
            {
             method: "PUT",
-            body: JSON.stringify([{ label: "Como que no hay tareas", done: false }]),
+            // en body ponemos el contenido de lo que se manda
+            body: JSON.stringify([{ label: "hola estoy modificando", done: false }]),
             headers: {
                 "Content-Type": "application/json",
             },
@@ -37,10 +41,12 @@ const CRUD_Update = () => {
     
 
     return(
-        <div className="mx-auto my-auto p-3" style={{width:"280px", height:"800px"}}>
-            <h2 className="m-3"> UPDATE </h2>
-            <p className="my-2">Actualiza tareas</p>
-            <p className="my-2">Las tareas van dentro del body:([  objeto  ]) </p>
+        <div className="mx-auto mt-1 p-2" style={{width:"280px", height:"320px"}}>
+            <h2 className="my-1"> PUT - UPDATE </h2>
+                <p className="my-1">Actualiza tareas</p>
+                <p className="my-1">Las tareas van </p>
+                <p className="my-1">dentro del body:([  objeto  ]) </p>
+
             <form onSubmit={handleSubmit}>
                 <input 
                     type="text"

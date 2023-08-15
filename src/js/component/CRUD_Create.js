@@ -37,9 +37,10 @@ const CRUD_Create = () => {
     
 
     return(
-        <div className="mx-auto my-auto p-3" style={{width:"280px", height:"800px"}}>
-            <h2 className="m-3"> POST (CREATE)</h2>
-            <p className="my-2">Agregar usuario</p>
+        <div className="mx-auto mt-1 p-2" style={{width:"280px", height:"320px"}}>
+            <h2 className="my-1"> POST (CREATE)</h2>
+            <p className="my-1">Agregar usuario</p>
+            
             <form onSubmit={handleSubmit}>
                 <input 
                     type="text"

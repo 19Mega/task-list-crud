@@ -23,8 +23,9 @@ const CRUD_Delete = () => {
   }, [userName])
 
   return (
-    <div>
-        <h2 className="my-5"> DELETE </h2>
+    <div className="mx-auto mt-1 p-2" style={{width:"280px", height:"320px"}}>
+        <h2 className="my-1"> DELETE </h2>
+        
         <input
             type="text"
             placeholder="User name"

@@ -32,12 +32,12 @@ const ToDoListComponent = () => {
     // onKeyDown={} evento de presionar tecla
 
     return (
-        <div>
+        <div className="mx-auto mt-1 p-2" style={{width:"280px", height:"320px"}}>
             
-            <h1 className="p-2 m-2 mx-auto"> todos </h1>
+            <h2 className="my-1 text-white"> todo's </h2>
 
             {/* lista de toDo */}
-            <div className="list-group mx-auto" style={{width:"400px"}}>
+            <div className="list-group mx-auto" style={{width:"260px"}}>
 
                 {/* input de toDo */}
                 <input className="list-group-item list-group-item-action"
